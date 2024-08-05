@@ -1,0 +1,10 @@
+name: jokes_repository
+description: A repository that handles jokes requests.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: "^3.3.0"
+
+dev_dependencies:
+  very_good_analysis: ^5.1.0
