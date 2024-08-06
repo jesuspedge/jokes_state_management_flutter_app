@@ -7,5 +7,5 @@ abstract class JokesRepository {
 
   /// Gets a [Joke].
   ///
-  /// If a something goes wrong retunr a [Failure].
+  /// If a something goes wrong return a [Failure].
 }
