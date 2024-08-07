@@ -1,3 +1,5 @@
+import 'package:jokes_repository/jokes_repository.dart';
+
 /// {@template jokes_repository}
 /// A repository that handles jokes requests.
 /// {@endtemplate}
@@ -8,4 +10,9 @@ abstract class JokesRepository {
   /// Gets a [Joke].
   ///
   /// If a something goes wrong return a [Failure].
+  Future<Result<Joke, Failure>> getJoke({
+    required JokeCategory category,
+    required JokeLanguage language,
+    required JokeType type,
+  });
 }
