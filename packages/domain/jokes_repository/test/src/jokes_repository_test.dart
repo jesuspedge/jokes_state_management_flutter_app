@@ -1,4 +1,6 @@
 // ignore_for_file: prefer_const_constructors
+import 'dart:math';
+
 import 'package:jokes_repository/jokes_repository.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
@@ -15,10 +17,71 @@ void main() {
   });
 
   group('Jokes Repository', () {
-    group('returns single joke with', () {
+    group('returns joke with', () {
       final Joke testJoke =
           JokeModel(type: JokeType.single, joke: '', setup: '', delivery: '');
-      test('any category parameter', () async {
+      final Joke singleTestJoke = JokeModel(
+        type: JokeType.single,
+        joke: 'joke',
+        setup: '',
+        delivery: '',
+      );
+      final Joke twopartsTestJoke = JokeModel(
+        type: JokeType.twopart,
+        joke: '',
+        setup: 'joke',
+        delivery: 'joke',
+      );
+
+      test('random category parameter', () async {
+        // arrange
+        final category = JokeCategory.values
+            .elementAt(Random().nextInt(JokeCategory.values.length));
+        when(
+          () => mockJokesRepository.getJoke(
+            category: category,
+            language: JokeLanguage.en,
+            type: JokeType.single,
+          ),
+        ).thenAnswer((_) async => Successful(testJoke));
+
+        // act
+        final result = await mockJokesRepository.getJoke(
+          category: category,
+          language: JokeLanguage.en,
+          type: JokeType.single,
+        );
+
+        // assert
+        expect(result, isA<Successful<Joke, Failure>>());
+        expect((result as Successful).value, testJoke);
+      });
+
+      test('random language parameter', () async {
+        // arrange
+        final language = JokeLanguage.values
+            .elementAt(Random().nextInt(JokeLanguage.values.length));
+        when(
+          () => mockJokesRepository.getJoke(
+            category: JokeCategory.any,
+            language: language,
+            type: JokeType.single,
+          ),
+        ).thenAnswer((_) async => Successful(testJoke));
+
+        // act
+        final result = await mockJokesRepository.getJoke(
+          category: JokeCategory.any,
+          language: language,
+          type: JokeType.single,
+        );
+
+        // assert
+        expect(result, isA<Successful<Joke, Failure>>());
+        expect((result as Successful).value, testJoke);
+      });
+
+      test('single joke parameter', () async {
         // arrange
         when(
           () => mockJokesRepository.getJoke(
@@ -26,7 +89,7 @@ void main() {
             language: JokeLanguage.en,
             type: JokeType.single,
           ),
-        ).thenAnswer((_) async => Successful(testJoke));
+        ).thenAnswer((_) async => Successful(singleTestJoke));
 
         // act
         final result = await mockJokesRepository.getJoke(
@@ -36,8 +99,30 @@ void main() {
         );
 
         // assert
-        expect(result, Successful<Joke, Failure>(testJoke));
-        verifyNoMoreInteractions(mockJokesRepository);
+        expect(result, isA<Successful<Joke, Failure>>());
+        expect((result as Successful).value, singleTestJoke);
+      });
+
+      test('two parts joke parameter', () async {
+        // arrange
+        when(
+          () => mockJokesRepository.getJoke(
+            category: JokeCategory.any,
+            language: JokeLanguage.en,
+            type: JokeType.twopart,
+          ),
+        ).thenAnswer((_) async => Successful(twopartsTestJoke));
+
+        // act
+        final result = await mockJokesRepository.getJoke(
+          category: JokeCategory.any,
+          language: JokeLanguage.en,
+          type: JokeType.twopart,
+        );
+
+        // assert
+        expect(result, isA<Successful<Joke, Failure>>());
+        expect((result as Successful).value, twopartsTestJoke);
       });
     });
   });
