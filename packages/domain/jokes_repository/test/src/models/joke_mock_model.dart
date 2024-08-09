@@ -1,7 +1,7 @@
 import 'package:jokes_repository/jokes_repository.dart';
 
-class JokeModel extends Joke {
-  JokeModel({
+class JokeMockModel extends Joke {
+  JokeMockModel({
     required super.type,
     required super.joke,
     required super.setup,
