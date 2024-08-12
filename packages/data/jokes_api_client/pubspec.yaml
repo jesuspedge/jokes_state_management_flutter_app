@@ -1,0 +1,21 @@
+name: jokes_api_client
+description: A Flutter implementation of Jokes Repository that gets data from internet.
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: "^3.3.0"
+  flutter: "^3.19.0"
+
+dependencies:
+  dio: ^5.5.0
+  flutter:
+    sdk: flutter
+  jokes_repository:
+    path: ../../domain/jokes_repository
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^1.0.3
+  very_good_analysis: ^5.1.0
