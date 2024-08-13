@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:jokes_api_client/src/models/joke_model.dart';
 import 'package:jokes_api_client/src/typedefs.dart';
 import 'package:jokes_repository/jokes_repository.dart';
 
@@ -21,13 +22,29 @@ class JokesApiClient implements JokesRepository {
     required JokeLanguage language,
     required JokeType type,
   }) async {
-    final finalUrl =
-        '$baseUrl${category.text}?lang=${language.name}&type=${type.name}';
+    try {
+      final finalUrl =
+          '$baseUrl${category.text}?lang=${language.name}&type=${type.name}';
 
-    final result = await _client.get<Json>(finalUrl);
+      final response = await _client.get<Json>(finalUrl);
 
-    if (result.statusCode == 200) {}
+      if (response.statusCode == 200) {
+        final dataResponse = response.data ?? {};
 
-    return Unsuccessful(Failure(message: 'Server error'));
+        final joke = JokeModel.fromJson(dataResponse);
+
+        return Successful(joke);
+      }
+
+      throw ServerException(message: 'Server error: ${response.statusCode}');
+    } catch (error) {
+      final message = switch (error) {
+        FormatException(message: final message) => message,
+        ServerException(message: final message) => message,
+        _ => 'Unexpected error: $error'
+      };
+
+      return Unsuccessful(Failure(message: message));
+    }
   }
 }
