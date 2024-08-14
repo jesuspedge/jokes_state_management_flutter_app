@@ -47,7 +47,7 @@ void main() {
             language: JokeLanguage.en,
             type: JokeType.single,
           ),
-        ).thenAnswer((_) async => Successful(testJoke));
+        ).thenAnswer((_) async => Successful(value: testJoke));
 
         // act
         final result = await mockJokesRepository.getJoke(
@@ -71,7 +71,7 @@ void main() {
             language: language,
             type: JokeType.single,
           ),
-        ).thenAnswer((_) async => Successful(testJoke));
+        ).thenAnswer((_) async => Successful(value: testJoke));
 
         // act
         final result = await mockJokesRepository.getJoke(
@@ -93,7 +93,7 @@ void main() {
             language: JokeLanguage.en,
             type: JokeType.single,
           ),
-        ).thenAnswer((_) async => Successful(singleTestJoke));
+        ).thenAnswer((_) async => Successful(value: singleTestJoke));
 
         // act
         final result = await mockJokesRepository.getJoke(
@@ -115,7 +115,7 @@ void main() {
             language: JokeLanguage.en,
             type: JokeType.twopart,
           ),
-        ).thenAnswer((_) async => Successful(twopartsTestJoke));
+        ).thenAnswer((_) async => Successful(value: twopartsTestJoke));
 
         // act
         final result = await mockJokesRepository.getJoke(
@@ -143,7 +143,7 @@ void main() {
             language: JokeLanguage.en,
             type: JokeType.single,
           ),
-        ).thenAnswer((_) async => Unsuccessful(testFailure));
+        ).thenAnswer((_) async => Unsuccessful(value: testFailure));
 
         // act
         final result = await mockJokesRepository.getJoke(
@@ -167,7 +167,7 @@ void main() {
             language: language,
             type: JokeType.single,
           ),
-        ).thenAnswer((_) async => Unsuccessful(testFailure));
+        ).thenAnswer((_) async => Unsuccessful(value: testFailure));
 
         // act
         final result = await mockJokesRepository.getJoke(
@@ -191,7 +191,7 @@ void main() {
             language: JokeLanguage.en,
             type: type,
           ),
-        ).thenAnswer((_) async => Unsuccessful(testFailure));
+        ).thenAnswer((_) async => Unsuccessful(value: testFailure));
 
         // act
         final result = await mockJokesRepository.getJoke(

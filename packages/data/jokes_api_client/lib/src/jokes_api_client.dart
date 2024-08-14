@@ -33,7 +33,7 @@ class JokesApiClient implements JokesRepository {
 
         final joke = JokeModel.fromJson(dataResponse);
 
-        return Successful(joke);
+        return Successful(value: joke);
       }
 
       throw ServerException(message: 'Server error: ${response.statusCode}');
@@ -44,7 +44,7 @@ class JokesApiClient implements JokesRepository {
         _ => 'Unexpected error: $error'
       };
 
-      return Unsuccessful(Failure(message: message));
+      return Unsuccessful(value: Failure(message: message));
     }
   }
 }

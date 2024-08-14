@@ -9,7 +9,7 @@ sealed class Result<T, E> {}
 /// {@endtemplate}
 class Successful<T, E> extends Result<T, E> {
   /// {@macro succesful}
-  Successful(this.value);
+  Successful({required this.value});
 
   /// Value returned
   final T value;
@@ -21,7 +21,7 @@ class Successful<T, E> extends Result<T, E> {
 /// {@endtemplate}
 class Unsuccessful<T, E> extends Result<T, E> {
   /// {@macro unsuccesful}
-  Unsuccessful(this.value);
+  Unsuccessful({required this.value});
 
   /// Value returned
   final E value;
