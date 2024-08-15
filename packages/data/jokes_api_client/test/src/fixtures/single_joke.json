@@ -1,0 +1,17 @@
+{
+  "error": false,
+  "category": "Misc",
+  "type": "single",
+  "joke": "A perfectionist walked into a bar... apparently, the bar was not set high enough.",
+  "flags": {
+      "nsfw": false,
+      "religious": false,
+      "political": false,
+      "racist": false,
+      "sexist": false,
+      "explicit": false
+  },
+  "safe": true,
+  "id": 288,
+  "lang": "en"
+}
