@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_equals_and_hash_code_on_mutable_classes
+
 import 'package:jokes_api_client/src/typedefs.dart';
 import 'package:jokes_repository/jokes_repository.dart';
 
@@ -71,4 +73,19 @@ class JokeModel extends Joke {
 
     throw const FormatException('Error parsing joke response');
   }
+
+  /// Overriding for compare samae objects
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is JokeModel &&
+          runtimeType == other.runtimeType &&
+          type == other.type &&
+          joke == other.joke &&
+          setup == other.setup &&
+          delivery == other.delivery;
+
+  /// Overriding for compare samae objects
+  @override
+  int get hashCode => joke.hashCode;
 }
