@@ -39,5 +39,29 @@ void main() {
       /// assert
       expect(twoPartsJoke, fakeTwoPartsJokeModel);
     });
+
+    test('Throws Format Exception when json format is not correct', () {
+      /// arrange
+      final jsonDifferent =
+          jsonDecode(fixture(name: 'different_json.json')) as Json;
+
+      /// assert
+      expect(
+        () => JokeModel.fromJson(jsonDifferent),
+        throwsA(isA<FormatException>()),
+      );
+    });
+
+    test('Throws Server Exception when joke error is true', () {
+      /// arrange
+      final jsonErrorJoke =
+          jsonDecode(fixture(name: 'error_joke.json')) as Json;
+
+      /// assert
+      expect(
+        () => JokeModel.fromJson(jsonErrorJoke),
+        throwsA(isA<ServerException>()),
+      );
+    });
   });
 }

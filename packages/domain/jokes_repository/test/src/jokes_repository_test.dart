@@ -37,7 +37,7 @@ void main() {
         delivery: 'joke',
       );
 
-      test('random category parameter', () async {
+      test('Random category parameter', () async {
         // arrange
         final category = JokeCategory.values
             .elementAt(Random().nextInt(JokeCategory.values.length));
@@ -61,7 +61,7 @@ void main() {
         expect((result as Successful).value, testJoke);
       });
 
-      test('random language parameter', () async {
+      test('Random language parameter', () async {
         // arrange
         final language = JokeLanguage.values
             .elementAt(Random().nextInt(JokeLanguage.values.length));
@@ -85,7 +85,7 @@ void main() {
         expect((result as Successful).value, testJoke);
       });
 
-      test('single joke parameter', () async {
+      test('Single joke parameter', () async {
         // arrange
         when(
           () => mockJokesRepository.getJoke(
@@ -107,7 +107,7 @@ void main() {
         expect((result as Successful).value, singleTestJoke);
       });
 
-      test('two parts joke parameter', () async {
+      test('Two parts joke parameter', () async {
         // arrange
         when(
           () => mockJokesRepository.getJoke(
@@ -133,7 +133,7 @@ void main() {
     group('returns failure with fail message', () {
       final testFailure = Failure(message: 'error');
 
-      test('random category parameter', () async {
+      test('Random category parameter', () async {
         // arrange
         final category = JokeCategory.values
             .elementAt(Random().nextInt(JokeCategory.values.length));
@@ -157,7 +157,7 @@ void main() {
         expect((result as Unsuccessful).value, testFailure);
       });
 
-      test('random language parameter', () async {
+      test('Random language parameter', () async {
         // arrange
         final language = JokeLanguage.values
             .elementAt(Random().nextInt(JokeLanguage.values.length));
@@ -181,7 +181,7 @@ void main() {
         expect((result as Unsuccessful).value, testFailure);
       });
 
-      test('random type parameter', () async {
+      test('Random type parameter', () async {
         // arrange
         final type =
             JokeType.values.elementAt(Random().nextInt(JokeType.values.length));
