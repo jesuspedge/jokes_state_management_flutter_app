@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:jokes_repository/jokes_repository.dart';
 
 class JokesApp extends StatelessWidget {
-  const JokesApp({super.key});
+  const JokesApp({
+    required this.jokesRepository,
+    super.key,
+  });
+
+  final JokesRepository jokesRepository;
 
   @override
   Widget build(BuildContext context) {

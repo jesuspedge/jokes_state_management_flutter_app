@@ -11,8 +11,13 @@ environment:
 
 dependencies:
   cupertino_icons: ^1.0.6
+  dio: ^5.5.0
   flutter:
     sdk: flutter
+  jokes_api_client:
+    path: packages/data/jokes_api_client
+  jokes_repository:
+    path: packages/domain/jokes_repository
   
 
 dev_dependencies:
