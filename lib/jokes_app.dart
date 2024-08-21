@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jokes_app/home_page.dart';
 import 'package:jokes_repository/jokes_repository.dart';
 
 class JokesApp extends StatelessWidget {
@@ -15,11 +16,8 @@ class JokesApp extends StatelessWidget {
       title: 'Jokes App',
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData.dark(useMaterial3: true),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Jokes App'),
-        ),
-      ),
+      theme: ThemeData.dark(),
+      home: HomePage(jokesRepository: jokesRepository),
     );
   }
 }
