@@ -18,6 +18,21 @@ class _HomePageState extends State<HomePage> {
   JokeCategory _category = JokeCategory.any;
   JokeLanguage _language = JokeLanguage.en;
   JokeType _type = JokeType.single;
+  bool _loading = false;
+  bool _error = false;
+  String _errorMessage = '';
+  Joke? _joke;
+
+  Future<void> _getJoke() async {
+    setState(() => _loading = true);
+
+    final result = widget._jokesRepository
+        .getJoke(category: _category, language: _language, type: _type);
+
+    setState(() => _loading = false);
+
+    switch (result) {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,10 +97,15 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               const SizedBox(height: 20),
-              const JokesContainer(),
+              JokesContainer(
+                loading: _loading,
+                error: _error,
+                joke: _joke,
+                errorMessage: _errorMessage,
+              ),
               const SizedBox(height: 20),
               GetJokeButton(
-                onPressed: () {},
+                onPressed: _getJoke,
               ),
             ],
           ),
