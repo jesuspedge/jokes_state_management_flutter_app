@@ -18,20 +18,25 @@ class _HomePageState extends State<HomePage> {
   JokeCategory _category = JokeCategory.any;
   JokeLanguage _language = JokeLanguage.en;
   JokeType _type = JokeType.single;
-  bool _loading = false;
-  bool _error = false;
-  String _errorMessage = '';
-  Joke? _joke;
+  Widget childJokesContainer = const NoJokeWidget();
+
+  void _changeJokeContainerWidget({required Widget newWidget}) =>
+      setState(() => childJokesContainer = newWidget);
 
   Future<void> _getJoke() async {
-    setState(() => _loading = true);
+    _changeJokeContainerWidget(newWidget: const LoadingWidget());
 
-    final result = widget._jokesRepository
+    final result = await widget._jokesRepository
         .getJoke(category: _category, language: _language, type: _type);
 
-    setState(() => _loading = false);
-
-    switch (result) {}
+    switch (result) {
+      case Successful(value: final joke):
+        {
+          _changeJokeContainerWidget(newWidget: JokeWidget(joke: joke));
+        }
+      case Unsuccessful(value: final failure):
+        {}
+    }
   }
 
   @override
@@ -98,10 +103,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 20),
               JokesContainer(
-                loading: _loading,
-                error: _error,
-                joke: _joke,
-                errorMessage: _errorMessage,
+                child: childJokesContainer,
               ),
               const SizedBox(height: 20),
               GetJokeButton(
