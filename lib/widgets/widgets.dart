@@ -1,4 +1,5 @@
 export 'category_filter.dart';
+export 'error_joke_widget.dart';
 export 'get_joke_button.dart';
 export 'joke_widget.dart';
 export 'jokes_container.dart';

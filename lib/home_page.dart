@@ -35,7 +35,11 @@ class _HomePageState extends State<HomePage> {
           _changeJokeContainerWidget(newWidget: JokeWidget(joke: joke));
         }
       case Unsuccessful(value: final failure):
-        {}
+        {
+          _changeJokeContainerWidget(
+            newWidget: ErrorJokeWidget(text: failure.message),
+          );
+        }
     }
   }
 
