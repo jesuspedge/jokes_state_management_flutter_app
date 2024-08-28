@@ -17,7 +17,7 @@ class JokesContainer extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: Colors.white.withOpacity(0.3)),
         ),
-        child: child,
+        child: Center(child: SingleChildScrollView(child: child)),
       ),
     );
   }

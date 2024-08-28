@@ -56,54 +56,39 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: Column(
             children: [
-              Table(
-                defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-                children: [
-                  TableRow(
-                    children: [
-                      Text('Language:', style: textStyle),
-                      LanguageFilter(
-                        value: _language,
-                        onChanged: (newValue) => setState(
-                          () => _language = newValue ?? JokeLanguage.en,
-                        ),
+              SingleChildScrollView(
+                child: Row(
+                  children: [
+                    Text('Language:  ', style: textStyle),
+                    LanguageFilter(
+                      value: _language,
+                      onChanged: (newValue) => setState(
+                        () => _language = newValue ?? JokeLanguage.en,
                       ),
-                    ],
-                  ),
-                  const TableRow(
-                    children: [
-                      SizedBox(height: 10),
-                      SizedBox(height: 10),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      Text('Category:', style: textStyle),
-                      CategoryFilter(
-                        value: _category,
-                        onChanged: (newValue) => setState(
-                          () => _category = newValue ?? JokeCategory.any,
-                        ),
+                    ),
+                    const SizedBox(width: 20),
+                    Text('Type:  ', style: textStyle),
+                    TypeFilter(
+                      value: _type,
+                      onChanged: (newValue) =>
+                          setState(() => _type = newValue ?? JokeType.single),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              SingleChildScrollView(
+                child: Row(
+                  children: [
+                    Text('Category:  ', style: textStyle),
+                    CategoryFilter(
+                      value: _category,
+                      onChanged: (newValue) => setState(
+                        () => _category = newValue ?? JokeCategory.any,
                       ),
-                    ],
-                  ),
-                  const TableRow(
-                    children: [
-                      SizedBox(height: 10),
-                      SizedBox(height: 10),
-                    ],
-                  ),
-                  TableRow(
-                    children: [
-                      Text('Type:', style: textStyle),
-                      TypeFilter(
-                        value: _type,
-                        onChanged: (newValue) =>
-                            setState(() => _type = newValue ?? JokeType.single),
-                      ),
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 20),
               JokesContainer(

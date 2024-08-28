@@ -14,12 +14,12 @@ class TypeFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      height: 40,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.white.withOpacity(0.3)),
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(10),
       ),
-      child: DropdownButtonFormField<JokeType>(
+      child: DropdownButton<JokeType>(
         onChanged: onChanged,
         value: value,
         items: JokeType.values
@@ -28,9 +28,9 @@ class TypeFilter extends StatelessWidget {
                   DropdownMenuItem(value: value, child: Text(value.text)),
             )
             .toList(),
-        dropdownColor: Colors.black.withOpacity(0.7),
         elevation: 3,
-        decoration: const InputDecoration(border: InputBorder.none),
+        padding: const EdgeInsets.only(left: 10),
+        underline: const DropdownButtonHideUnderline(child: SizedBox.shrink()),
       ),
     );
   }
