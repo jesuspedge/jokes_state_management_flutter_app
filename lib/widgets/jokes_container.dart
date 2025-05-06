@@ -15,7 +15,7 @@ class JokesContainer extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white.withOpacity(0.3)),
+          border: Border.all(color: Colors.white.withAlpha(75)),
         ),
         child: Center(child: SingleChildScrollView(child: child)),
       ),

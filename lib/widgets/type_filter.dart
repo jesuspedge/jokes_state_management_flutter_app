@@ -16,7 +16,7 @@ class TypeFilter extends StatelessWidget {
     return Container(
       height: 40,
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.white.withOpacity(0.3)),
+        border: Border.all(color: Colors.white.withAlpha(75)),
         borderRadius: BorderRadius.circular(10),
       ),
       child: DropdownButton<JokeType>(

@@ -16,7 +16,7 @@ class GetJokeButton extends StatelessWidget {
         foregroundColor: Colors.black,
         backgroundColor: Colors.black,
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-        side: BorderSide(color: Colors.white.withOpacity(0.3)),
+        side: BorderSide(color: Colors.white.withAlpha(75)),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
       child: const Text(
