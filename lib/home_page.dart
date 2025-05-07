@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme.titleMedium;
+    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
@@ -55,46 +56,53 @@ class _HomePageState extends State<HomePage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: Column(
+            spacing: 20,
             children: [
-              SingleChildScrollView(
-                child: Row(
-                  children: [
-                    Text('Language:  ', style: textStyle),
-                    LanguageFilter(
-                      value: _language,
-                      onChanged: (newValue) => setState(
-                        () => _language = newValue ?? JokeLanguage.en,
+              Wrap(
+                spacing: size.width * 0.1,
+                runSpacing: 10,
+                children: [
+                  Column(
+                    spacing: 5,
+                    children: [
+                      Text('Language:  ', style: textStyle),
+                      LanguageFilter(
+                        value: _language,
+                        onChanged: (newValue) => setState(
+                          () => _language = newValue ?? JokeLanguage.en,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 20),
-                    Text('Type:  ', style: textStyle),
-                    TypeFilter(
-                      value: _type,
-                      onChanged: (newValue) =>
-                          setState(() => _type = newValue ?? JokeType.single),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              SingleChildScrollView(
-                child: Row(
-                  children: [
-                    Text('Category:  ', style: textStyle),
-                    CategoryFilter(
-                      value: _category,
-                      onChanged: (newValue) => setState(
-                        () => _category = newValue ?? JokeCategory.any,
+                    ],
+                  ),
+                  Column(
+                    spacing: 5,
+                    children: [
+                      Text('Category:  ', style: textStyle),
+                      CategoryFilter(
+                        value: _category,
+                        onChanged: (newValue) => setState(
+                          () => _category = newValue ?? JokeCategory.any,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
+                  Column(
+                    spacing: 5,
+                    children: [
+                      Text('Type:  ', style: textStyle),
+                      TypeFilter(
+                        value: _type,
+                        onChanged: (newValue) =>
+                            setState(() => _type = newValue ?? JokeType.single),
+                      ),
+                    ],
+                  ),
+                  
+                ],
               ),
-              const SizedBox(height: 20),
               JokesContainer(
                 child: childJokesContainer,
               ),
-              const SizedBox(height: 20),
               GetJokeButton(
                 onPressed: _getJoke,
               ),
