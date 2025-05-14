@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:jokes_app/jokes_state/jokes_inherited_widget.dart';
 
 class GetJokeButton extends StatelessWidget {
-  const GetJokeButton({
-    required this.onPressed,
-    super.key,
-  });
-
-  final void Function()? onPressed;
+  const GetJokeButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final jokesInheritedState = JokesInheritedWidget.of(context);
+
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: () async => jokesInheritedState.getJoke(),
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.black,
         backgroundColor: Colors.black,
