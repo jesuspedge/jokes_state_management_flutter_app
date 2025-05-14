@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:jokes_app/jokes_state/jokes_inherited_widget.dart';
 import 'package:jokes_repository/jokes_repository.dart';
 
 class TypeFilter extends StatelessWidget {
-  const TypeFilter({
-    required this.value,
-    required this.onChanged,
-    super.key,
-  });
-
-  final JokeType? value;
-  final void Function(JokeType?)? onChanged;
-
+  const TypeFilter({super.key});
   @override
   Widget build(BuildContext context) {
+    final jokesInheritedState = JokesInheritedWidget.of(context);
+
     return Container(
       height: 40,
       decoration: BoxDecoration(
@@ -20,8 +15,9 @@ class TypeFilter extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: DropdownButton<JokeType>(
-        onChanged: onChanged,
-        value: value,
+        onChanged: (newtype) =>
+            jokesInheritedState.setType(newtype ?? JokeType.single),
+        value: jokesInheritedState.type,
         items: JokeType.values
             .map(
               (value) =>

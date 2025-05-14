@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:jokes_app/jokes_state/jokes_inherited_widget.dart';
 import 'package:jokes_repository/jokes_repository.dart';
 
 class LanguageFilter extends StatelessWidget {
-  const LanguageFilter({
-    required this.value,
-    required this.onChanged,
-    super.key,
-  });
-
-  final JokeLanguage? value;
-  final void Function(JokeLanguage?)? onChanged;
+  const LanguageFilter({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final jokesInheritedState = JokesInheritedWidget.of(context);
+
     return Container(
       height: 40,
       decoration: BoxDecoration(
@@ -20,8 +16,9 @@ class LanguageFilter extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: DropdownButton<JokeLanguage>(
-        onChanged: onChanged,
-        value: value,
+        onChanged: (newLanguage) =>
+            jokesInheritedState.setLanguage(newLanguage ?? JokeLanguage.en),
+        value: jokesInheritedState.language,
         items: JokeLanguage.values
             .map(
               (value) =>
