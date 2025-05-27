@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jokes_app/blocs/blocs.dart';
 import 'package:jokes_repository/jokes_repository.dart';
 
 class LanguageFilter extends StatelessWidget {
-  const LanguageFilter({
-    required this.value,
-    required this.onChanged,
-    super.key,
-  });
-
-  final JokeLanguage? value;
-  final void Function(JokeLanguage?)? onChanged;
+  const LanguageFilter({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +14,28 @@ class LanguageFilter extends StatelessWidget {
         border: Border.all(color: Colors.white.withAlpha(75)),
         borderRadius: BorderRadius.circular(10),
       ),
-      child: DropdownButton<JokeLanguage>(
-        onChanged: onChanged,
-        value: value,
-        items: JokeLanguage.values
-            .map(
-              (value) =>
-                  DropdownMenuItem(value: value, child: Text(value.text)),
-            )
-            .toList(),
-        elevation: 3,
-        padding: const EdgeInsets.only(left: 10),
-        underline: const DropdownButtonHideUnderline(child: SizedBox.shrink()),
+      child: BlocSelector<JokeFiltersCubit, JokeFiltersState, JokeLanguage>(
+        selector: (state) => state.language,
+        builder: (context, language) => DropdownButton<JokeLanguage>(
+          onChanged: (languageSelected) {
+            if (languageSelected != null) {
+              context
+                  .read<JokeFiltersCubit>()
+                  .updateLanguage(newLanguage: languageSelected);
+            }
+          },
+          value: language,
+          items: JokeLanguage.values
+              .map(
+                (value) =>
+                    DropdownMenuItem(value: value, child: Text(value.text)),
+              )
+              .toList(),
+          elevation: 3,
+          padding: const EdgeInsets.only(left: 10),
+          underline:
+              const DropdownButtonHideUnderline(child: SizedBox.shrink()),
+        ),
       ),
     );
   }

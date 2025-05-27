@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jokes_app/home_page.dart';
 import 'package:jokes_app/jokes_app.dart';
@@ -24,9 +25,10 @@ void main() {
       expect(materialApp.theme, equals(ThemeData.dark()));
     });
 
-    testWidgets('Renders Home Page', (tester) async {
+    testWidgets('Renders MultiBloc Provider with Home Page', (tester) async {
       await tester.pumpWidget(JokesApp(jokesRepository: jokesRepository));
-
+      
+      expect(find.byType(MultiBlocProvider), findsOneWidget);
       expect(find.byType(HomePage), findsOneWidget);
     });
   });

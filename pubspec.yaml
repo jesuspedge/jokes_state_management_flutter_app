@@ -10,14 +10,17 @@ environment:
 
 
 dependencies:
+  bloc: ^9.0.0
   cupertino_icons: ^1.0.8
   dio: ^5.8.0+1
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.1.1
   jokes_api_client:
     path: packages/data/jokes_api_client
   jokes_repository:
     path: packages/domain/jokes_repository
+  meta: ^1.16.0
   
 
 dev_dependencies:
