@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jokes_app/states/states.dart';
 import 'package:jokes_repository/jokes_repository.dart';
 
-class TypeFilter extends StatelessWidget {
-  const TypeFilter({
-    required this.value,
-    required this.onChanged,
-    super.key,
-  });
-
-  final JokeType? value;
-  final void Function(JokeType?)? onChanged;
+class TypeFilter extends ConsumerWidget {
+  const TypeFilter({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Watch type filter state
+    final type = ref.watch(jokeFiltersProvider).type;
+
     return Container(
       height: 40,
       decoration: BoxDecoration(
@@ -20,8 +18,14 @@ class TypeFilter extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: DropdownButton<JokeType>(
-        onChanged: onChanged,
-        value: value,
+        onChanged: (typeSelected) {
+          if(typeSelected != null) {
+            ref
+                .read(jokeFiltersProvider.notifier)
+                .updateType(newType: typeSelected);
+          }
+        },
+        value: type,
         items: JokeType.values
             .map(
               (value) =>

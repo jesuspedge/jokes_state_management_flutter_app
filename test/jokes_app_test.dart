@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jokes_app/home_page.dart';
 import 'package:jokes_app/jokes_app.dart';
-import 'package:jokes_repository/jokes_repository.dart';
-import 'package:mocktail/mocktail.dart';
-
-class MockJokesRepository extends Mock implements JokesRepository {}
 
 void main() {
-  late JokesRepository jokesRepository;
-
-  setUp(() {
-    jokesRepository = MockJokesRepository();
-  });
-
   group('Jokes App', () {
+    testWidgets('Renders ProviderScope', (tester) async {
+      await tester.pumpWidget(const ProviderScope(child: JokesApp()));
+
+      expect(find.byType(ProviderScope), findsOneWidget);
+    });
+
     testWidgets('Renders MaterialApp with dark theme', (tester) async {
-      await tester.pumpWidget(JokesApp(jokesRepository: jokesRepository));
+      await tester.pumpWidget(const ProviderScope(child: JokesApp()));
 
       expect(find.byType(MaterialApp), findsOneWidget);
 
@@ -25,7 +22,7 @@ void main() {
     });
 
     testWidgets('Renders Home Page', (tester) async {
-      await tester.pumpWidget(JokesApp(jokesRepository: jokesRepository));
+      await tester.pumpWidget(const ProviderScope(child: JokesApp()));
 
       expect(find.byType(HomePage), findsOneWidget);
     });

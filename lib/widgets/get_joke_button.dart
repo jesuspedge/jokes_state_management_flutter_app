@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jokes_app/states/states.dart';
 
-class GetJokeButton extends StatelessWidget {
-  const GetJokeButton({
-    required this.onPressed,
-    super.key,
-  });
-
-  final void Function()? onPressed;
+class GetJokeButton extends ConsumerWidget {
+  const GetJokeButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed: () {
+        // final category = ref.read(categoryFilterProvider);
+        // final language = ref.read(languageFilterProvider);
+        // final type = ref.read(typeFilterProvider);
+        final filtersState = ref.read(jokeFiltersProvider);
+
+        ref.read(jokesProvider.notifier).getJoke(
+              category: filtersState.category,
+              language: filtersState.language,
+              type: filtersState.type,
+            );
+      },
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.black,
         backgroundColor: Colors.black,

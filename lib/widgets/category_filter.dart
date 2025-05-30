@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jokes_app/states/states.dart';
 import 'package:jokes_repository/jokes_repository.dart';
 
-class CategoryFilter extends StatelessWidget {
-  const CategoryFilter({
-    required this.value,
-    required this.onChanged,
-    super.key,
-  });
-
-  final JokeCategory? value;
-  final void Function(JokeCategory?)? onChanged;
+class CategoryFilter extends ConsumerWidget {
+  const CategoryFilter({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Watch category filter state
+    final category = ref.watch(jokeFiltersProvider).category;
+
     return Container(
       height: 40,
       decoration: BoxDecoration(
@@ -20,8 +18,14 @@ class CategoryFilter extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: DropdownButton<JokeCategory>(
-        onChanged: onChanged,
-        value: value,
+        onChanged: (categorySelected) {
+          if (categorySelected != null) {
+            ref
+                .read(jokeFiltersProvider.notifier)
+                .updateCategory(newCategory: categorySelected);
+          }
+        },
+        value: category,
         items: JokeCategory.values
             .map(
               (value) =>

@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:jokes_app/states/states.dart';
 import 'package:jokes_repository/jokes_repository.dart';
 
-class LanguageFilter extends StatelessWidget {
-  const LanguageFilter({
-    required this.value,
-    required this.onChanged,
-    super.key,
-  });
-
-  final JokeLanguage? value;
-  final void Function(JokeLanguage?)? onChanged;
+class LanguageFilter extends ConsumerWidget {
+  const LanguageFilter({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // Watch language filter state
+    final language = ref.watch(jokeFiltersProvider).language;
+
     return Container(
       height: 40,
       decoration: BoxDecoration(
@@ -20,8 +18,14 @@ class LanguageFilter extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: DropdownButton<JokeLanguage>(
-        onChanged: onChanged,
-        value: value,
+        onChanged: (languageSelected) {
+          if(languageSelected != null) {
+            ref
+                .read(jokeFiltersProvider.notifier)
+                .updateLanguage(newLanguage: languageSelected);
+          }
+        },
+        value: language,
         items: JokeLanguage.values
             .map(
               (value) =>

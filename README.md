@@ -8,4 +8,4 @@ An example jokes app that showcases different state management patterns and clea
 
 ## Getting Started 🚀
 
-This project uses `set state` approach as state manager.
+This project uses `flutter_riverpod` approach as state manager.

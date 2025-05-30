@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jokes_app/home_page.dart';
-import 'package:jokes_repository/jokes_repository.dart';
 
 class JokesApp extends StatelessWidget {
-  const JokesApp({
-    required this.jokesRepository,
-    super.key,
-  });
-
-  final JokesRepository jokesRepository;
+  const JokesApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +11,7 @@ class JokesApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       darkTheme: ThemeData.dark(useMaterial3: true),
       theme: ThemeData.dark(),
-      home: HomePage(jokesRepository: jokesRepository),
+      home: const HomePage(),
     );
   }
 }
