@@ -10,8 +10,8 @@ environment:
 
 
 dependencies:
-  cupertino_icons: ^1.0.8
-  dio: ^5.9.0
+  cupertino_icons: ^1.0.9
+  dio: ^5.9.2
   flutter:
     sdk: flutter
   jokes_api_client:
@@ -23,8 +23,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mocktail: ^1.0.4
-  very_good_analysis: ^10.0.0
+  mocktail: ^1.0.5
+  very_good_analysis: ^10.2.0
 
 
 flutter:
